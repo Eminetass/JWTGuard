@@ -24,7 +24,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestBody User user) {
         User existingUser = userService.findByUsername(user.getUsername());
-        if (existingUser == null || !userService.passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+        if (existingUser == null || !userService.getPasswordEncoder().matches(user.getPassword(), existingUser.getPassword())) {
             throw new RuntimeException("Geçersiz kullanıcı adı veya şifre");
         }
         return jwtUtil.generateToken(existingUser.getUsername());
