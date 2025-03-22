@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Ana Sayfa</title>
+    <meta charset="UTF-8">
+    <title>Giriş Yap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        form {
+            display: inline-block;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<h1>Hoş Geldiniz!</h1>
-<a href="/login">Giriş Yap</a>
+    <h1>Giriş Yap</h1>
+    <form action="/api/auth/login" method="post" onsubmit="return validateForm()">
+        <input type="text" id="username" name="username" placeholder="Kullanıcı Adı" required>
+        <input type="password" id="password" name="password" placeholder="Şifre" required>
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            
+            if (username.trim() === "" || password.trim() === "") {
+                alert("Kullanıcı adı ve şifre boş bırakılamaz!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
